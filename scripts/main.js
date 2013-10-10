@@ -4,7 +4,9 @@ require.config({
 
 require([
   'Node',
-  'LinkedList'
-], function (Node, LinkedList) {
+  'LinkedList',
+  'DoublyLinkedList'
+], function (Node, LinkedList, DoublyLinkedList) {
   window.LinkedList = LinkedList;
+  window.DoublyLinkedList = DoublyLinkedList;
 });
