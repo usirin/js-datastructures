@@ -67,6 +67,11 @@ define(['Node'], function(Node) {
   };
 
   LinkedList.prototype.insertAt = function(index, data) {
+    if(index > this.length() || index < 0) {
+      console.log('Out of bounds');
+      return false;
+    }
+
     if(index === 0) {
       return this.prepend(data);
     }
@@ -74,6 +79,18 @@ define(['Node'], function(Node) {
     if(index === this.length()) {
       return this.append(data);
     }
+
+    var current = this.head;
+
+    for(var i = 1; i < index; i++) {
+      current = current.next;
+    }
+    next = current.next;
+    var newNode = new Node(data);
+    current.next = newNode;
+    newNode.next = next;
+    this._length = this._length + 1;
+    return this;
 
   };
 
