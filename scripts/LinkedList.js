@@ -16,19 +16,38 @@ define(['Node'], function(Node) {
     // this means the list is not empty,
     // so that we are looping throug to the
     // last element.
-    var tmp = this.head;
-    while(tmp.next) {
-      tmp = tmp.next;
+    var current = this.head;
+    while(current.next) {
+      current = current.next;
     }
-    tmp.next = new Node(data);
+    current.next = new Node(data);
     return this;
   };
 
   LinkedList.prototype.trim = function() {
-    var tmp = this.head;
-    while(tmp.next.next) {
-      tmp = tmp.next;
+    // special case for empty list.
+    if(!this.head) {
+      console.log('You can\'t trim out from an empty list');
+      return false;
     }
+    var current = this.head,
+        previous = this.head;
+
+    // special case for a list with only one node.
+    // means there is only one node in
+    // the list.
+    if(!current.next) {
+      this.head = null;
+      return previous;
+    }
+
+    // this is the rest of th
+    while(current.next) {
+      previous = current;
+      current = current.next;
+    }
+    previous.next = null;
+    return current;
   };
 
   return LinkedList;
