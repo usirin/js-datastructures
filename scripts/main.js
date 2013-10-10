@@ -1,10 +1,10 @@
 require.config({
-    
+  
 });
 
 require([
-    'Node',
-    'LinkedList'
+  'Node',
+  'LinkedList'
 ], function (Node, LinkedList) {
-    window.LinkedList = LinkedList;
+  window.LinkedList = LinkedList;
 });

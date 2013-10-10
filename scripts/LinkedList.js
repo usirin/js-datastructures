@@ -1,24 +1,24 @@
 define(['Node'], function(Node) {
-    var LinkedList = function() {
-        this.head = new Node;
+  var LinkedList = function() {
+    this.head = new Node;
+  }
+
+  LinkedList.prototype.append = function(data) {
+    var tmp = this.head;
+    while(tmp.next) {
+      tmp = tmp.next;
     }
+    tmp.next = new Node;
+    tmp.next.data = data;
+    return this;
+  };
 
-    LinkedList.prototype.append = function(data) {
-        var tmp = this.head;
-        while(tmp.next) {
-            tmp = tmp.next;
-        }
-        tmp.next = new Node;
-        tmp.next.data = data;
-        return this;
-    };
+  LinkedList.prototype.trim = function() {
+    var tmp = this.head;
+    while(tmp.next) {
+      tmp = tmp.next;
+    }
+  };
 
-    LinkedList.prototype.trim = function() {
-        var tmp = this.head;
-        while(tmp.next) {
-            tmp = tmp.next;
-        }
-    };
-
-    return LinkedList;
+  return LinkedList;
 });
