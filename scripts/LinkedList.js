@@ -3,6 +3,11 @@ define(['Node'], function(Node) {
     this.head = null;
   }
 
+  /**
+   * Appends an item to the end of the list.
+   * @param  {mixed} data
+   * @return {LinkedList}
+   */
   LinkedList.prototype.append = function(data) {
     // checking if the list is empty,
     // if so, creating a new Node with
@@ -24,6 +29,11 @@ define(['Node'], function(Node) {
     return this;
   };
 
+  /**
+   * Trims down an item from the list
+   * and returns it.
+   * @return {Node} [description]
+   */
   LinkedList.prototype.trim = function() {
     // special case for empty list.
     if(!this.head) {
@@ -50,6 +60,10 @@ define(['Node'], function(Node) {
     return current;
   };
 
+  /**
+   * Returns the length of the list
+   * @return {int}
+   */
   LinkedList.prototype.length = function() {
     var current = this.head,
         length = 0;
@@ -60,7 +74,6 @@ define(['Node'], function(Node) {
     }
 
     return length;
-
   };
 
   return LinkedList;
