@@ -4,7 +4,5 @@ define(['Node', 'LinkedList'], function(Node, LinkedList) {
     this.tail = null;
   }
 
-  DoublyLinkedList.prototype = LinkedList.prototype;
-
   return DoublyLinkedList;
 });

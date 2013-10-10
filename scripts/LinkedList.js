@@ -1,6 +1,7 @@
 define(['Node'], function(Node) {
   var LinkedList = function() {
     this.head = null;
+    this._length = 0;
   }
 
   /**
@@ -20,6 +21,7 @@ define(['Node'], function(Node) {
     // list.
     if(!this.head) {
       this.head = new Node(data);
+      this._length = this._length + 1;
       return this;
     }
 
@@ -31,6 +33,9 @@ define(['Node'], function(Node) {
       current = current.next;
     }
     current.next = new Node(data);
+
+    this._length = this._length + 1;
+
     return this;
   };
 
@@ -44,7 +49,7 @@ define(['Node'], function(Node) {
       console.log('Needs an input.');
       return false;
     }
-    
+
     // store the current list in a local
     // variable so that we can reference it later.
     var restOfTheList = this.head;
@@ -56,13 +61,26 @@ define(['Node'], function(Node) {
     // merge it with the rest of the list.
     this.head.next = restOfTheList;
 
+    this._length = this._length + 1;
+
     return this;
+  };
+
+  LinkedList.prototype.insertAt = function(index, data) {
+    if(index === 0) {
+      return this.prepend(data);
+    }
+
+    if(index === this.length()) {
+      return this.append(data);
+    }
+
   };
 
   /**
    * Trims down an item from the list
    * and returns it.
-   * @return {Node} [description]
+   * @return {Node}
    */
   LinkedList.prototype.trim = function() {
     // special case for empty list.
@@ -78,6 +96,7 @@ define(['Node'], function(Node) {
     // the list.
     if(!current.next) {
       this.head = null;
+      this._length = this._length - 1;
       return previous;
     }
 
@@ -87,6 +106,9 @@ define(['Node'], function(Node) {
       current = current.next;
     }
     previous.next = null;
+
+    this._length = this._length - 1;
+
     return current;
   };
 
@@ -105,6 +127,9 @@ define(['Node'], function(Node) {
     var current = this.head;
     var restOfTheList = current.next;
     this.head = restOfTheList;
+
+    this._length = this._length - 1;
+
     return current;
   }
 
@@ -113,15 +138,7 @@ define(['Node'], function(Node) {
    * @return {int}
    */
   LinkedList.prototype.length = function() {
-    var current = this.head,
-        length = 0;
-
-    while(current) {
-      length++;
-      current = current.next;
-    }
-
-    return length;
+    return this._length;
   };
 
   /**
