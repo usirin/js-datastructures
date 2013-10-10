@@ -50,5 +50,18 @@ define(['Node'], function(Node) {
     return current;
   };
 
+  LinkedList.prototype.length = function() {
+    var current = this.head,
+        length = 0;
+
+    while(current) {
+      length++;
+      current = current.next;
+    }
+
+    return length;
+
+  };
+
   return LinkedList;
 });
