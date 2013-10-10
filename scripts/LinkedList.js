@@ -82,7 +82,7 @@ define(['Node'], function(Node) {
 
   /**
    * shifts the first value of the LinkedList off and returns it, 
-   * shortening the array by one element and moving everything down
+   * shortening the array by one element and moving everything down.
    * @return {Node}
    */
   LinkedList.prototype.shift = function() {
