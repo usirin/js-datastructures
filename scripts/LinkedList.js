@@ -9,6 +9,11 @@ define(['Node'], function(Node) {
    * @return {LinkedList}
    */
   LinkedList.prototype.append = function(data) {
+    if(!data) {
+      console.log('Needs an input.');
+      return false;
+    }
+
     // checking if the list is empty,
     // if so, creating a new Node with
     // the given data, and returning the
@@ -35,6 +40,11 @@ define(['Node'], function(Node) {
    * @return {LinkedList}
    */
   LinkedList.prototype.prepend = function(data) {
+    if(!data) {
+      console.log('Needs an input.');
+      return false;
+    }
+    
     // store the current list in a local
     // variable so that we can reference it later.
     var restOfTheList = this.head;
