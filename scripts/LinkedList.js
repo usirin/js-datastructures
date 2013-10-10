@@ -30,6 +30,26 @@ define(['Node'], function(Node) {
   };
 
   /**
+   * Prepends an item to the start of the list.
+   * @param  {mixed} data
+   * @return {LinkedList}
+   */
+  LinkedList.prototype.prepend = function(data) {
+    // store the current list in a local
+    // variable so that we can reference it later.
+    var restOfTheList = this.head;
+
+    // create the new element and put it to
+    // the head of the list.
+    this.head = new Node(data);
+
+    // merge it with the rest of the list.
+    this.head.next = restOfTheList;
+
+    return this;
+  };
+
+  /**
    * Trims down an item from the list
    * and returns it.
    * @return {Node} [description]
@@ -75,6 +95,30 @@ define(['Node'], function(Node) {
 
     return length;
   };
+
+  /**
+   * Array form of the LinkedList.
+   * @return {Array}
+   */
+  LinkedList.prototype.toArray = function() {
+    var array = [],
+        current = this.head;
+
+    while(current) {
+      array.push(current.data);
+      current = current.next;
+    }
+
+    return array;
+  }
+
+  /**
+   * String representation of the LinkedList.
+   * @return {String} [description]
+   */
+  LinkedList.prototype.toString = function() {
+    return this.toArray().toString();
+  }
 
   return LinkedList;
 });
