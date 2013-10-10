@@ -81,6 +81,24 @@ define(['Node'], function(Node) {
   };
 
   /**
+   * shifts the first value of the LinkedList off and returns it, 
+   * shortening the array by one element and moving everything down
+   * @return {Node}
+   */
+  LinkedList.prototype.shift = function() {
+    // special case for empty list
+    if(!this.head) {
+      console.log('You can\'t shift out from an empty list');
+      return false;
+    }
+
+    var current = this.head;
+    var restOfTheList = current.next;
+    this.head = restOfTheList;
+    return current;
+  }
+
+  /**
    * Returns the length of the list
    * @return {int}
    */
