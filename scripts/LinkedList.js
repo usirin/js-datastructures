@@ -1,6 +1,6 @@
 define(['Node'], function(Node) {
   var LinkedList = function() {
-    this.head = new Node;
+    this.head = null;
   }
 
   LinkedList.prototype.append = function(data) {
@@ -15,7 +15,7 @@ define(['Node'], function(Node) {
 
   LinkedList.prototype.trim = function() {
     var tmp = this.head;
-    while(tmp.next) {
+    while(tmp.next.next) {
       tmp = tmp.next;
     }
   };
