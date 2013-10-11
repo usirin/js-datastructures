@@ -81,6 +81,68 @@ define(['DoublyNode'], function(Node) {
   };
 
   /**
+   * shifts the first value of the LinkedList off and returns it, 
+   * shortening the array by one element and moving everything down.
+   * @return {Node || boolean} false for empty list.
+   */
+  DoublyLinkedList.prototype.shift = function() {
+    // special case for empty list
+    if(!this.head) {
+      console.log('You can\'t shift out from an empty list');
+      return false;
+    }
+
+    var current = this.head;
+    var restOfTheList = current.next;
+    this.head = restOfTheList;
+
+    this._length -= 1;
+
+    if(this._length != 0) {
+      this.head.previous = null;
+    }
+    // this is the case for 1 element
+    // list.
+    else {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return current;
+  };
+
+  /**
+   * Trims down an item from the list
+   * and returns it.
+   * @return {Node || boolean} false for empty list.
+   */
+  DoublyLinkedList.prototype.trim = function() {
+    // special case for empty list
+    if(!this.head) {
+      console.log('You can\'t trim out from an empty list');
+      return false;
+    }
+
+    var current = this.tail;
+    var restOfTheList = current.previous;
+    this.tail = restOfTheList;
+
+    this._length -= 1;
+
+    if(this._length != 0) {
+      this.tail.next = null;
+    }
+    // this is the case for 1 element
+    // list.
+    else {
+      this.head = null;
+      this.tail = null;
+    }
+
+    return current;
+  };
+
+  /**
    * Returns the node at the given index.
    * @param  {int} index
    * @return {Node || boolean} false for out of bounds.
@@ -153,6 +215,45 @@ define(['DoublyNode'], function(Node) {
     rightBound.previous = newNode;
 
     this._length += 1;
+
+    return this;
+  };
+
+  /**
+   * Deletes the node at the given index
+   * @param  {int} index
+   * @return {LinkedList || boolean} false for out of bounds.
+   */
+  DoublyLinkedList.prototype.deleteAt = function(index) {
+    if(index > this.length() || index < 0) {
+      console.log('Out of bounds');
+      return false;
+    }
+
+    // if index === 0 it means the
+    // shift operation.
+    if(index === 0) {
+      this.shift();
+      return this;
+    }
+
+    // if the last element of the list
+    // it means the trim operation.
+    if(index === this.length() - 1) {
+      this.trim();
+      return this;
+    }
+
+    var nodeToBeDeleted = this.at(index);
+
+    var leftBound = nodeToBeDeleted.previous;
+
+    var rightBound = nodeToBeDeleted.next;
+
+    leftBound.next = rightBound;
+    rightBound.previous = leftBound;
+
+    this._length -= 1;
 
     return this;
   };
