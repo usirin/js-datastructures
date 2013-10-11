@@ -86,7 +86,7 @@ define(['DoublyNode'], function(Node) {
    * @return {Node || boolean} false for out of bounds.
    */
   DoublyLinkedList.prototype.at = function(index) {
-    if(index > this.length() || index < 0) {
+    if(index >= this.length() || index < 0) {
       console.log('Out of bounds');
       return false;
     }
@@ -95,7 +95,7 @@ define(['DoublyNode'], function(Node) {
 
     // means it is close to the start,
     // so we will iterate from the head.
-    if(index <= this._length / 2) {
+    if(index < this._length / 2) {
       current = this.head;
       for(var i = 0; i < index; i++) {
         current = current.next;
@@ -105,12 +105,42 @@ define(['DoublyNode'], function(Node) {
     // so we will iterate from the tail.
     else {
       current = this.tail;
-      for(var i = this._length; i > index; i--) {
+      for(var i = this._length; i > index + 1; i--) {
         current = current.previous;
       }
     }
 
     return current;
+  };
+
+  DoublyLinkedList.prototype.insertAt = function(index, data) {
+    if(index > this.length() || index < 0) {
+      console.log('Out of bounds');
+      return false;
+    }
+
+    if(index === 0) {
+      return this.prepend(data);
+    }
+
+    if(index === this.length()) {
+      return this.append(data);
+    }
+
+    var rightBound = this.at(index);
+    var leftBound = rightBound.previous;
+
+    var newNode = new Node(data);
+
+    newNode.next = rightBound;
+    newNode.previous = leftBound;
+
+    leftBound.next = newNode;
+    rightBound.previous = newNode;
+
+    this._length += 1;
+
+    return this;
   };
 
   /**
@@ -139,7 +169,7 @@ define(['DoublyNode'], function(Node) {
 
   /**
    * String representation of the DoublyLinkedList.
-   * @return {String} [description]
+   * @return {String}
    */
   DoublyLinkedList.prototype.toString = function() {
     return this.toArray().toString();

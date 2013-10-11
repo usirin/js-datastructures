@@ -72,7 +72,7 @@ define(['Node'], function(Node) {
    * @return {Node || boolean} false for out of bounds.
    */
   LinkedList.prototype.at = function(index) {
-    if(index > this.length() || index < 0) {
+    if(index >= this.length() || index < 0) {
       console.log('Out of bounds');
       return false;
     }
