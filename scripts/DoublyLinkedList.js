@@ -10,7 +10,7 @@ define(['DoublyNode'], function(Node) {
       console.log('Needs an input.');
       return false;
     }
-    
+
     if(this._length === 0) {
       var newNode = new Node(data);
       this.head = newNode;
@@ -81,6 +81,63 @@ define(['DoublyNode'], function(Node) {
   };
 
 
+  DoublyLinkedList.prototype.at = function(index) {
+    if(index > this.length() || index < 0) {
+      console.log('Out of bounds');
+      return false;
+    }
+
+    var current = null;
+
+    // means it is close to the start,
+    // so we will iterate from the head.
+    if(index <= this.length() / 2) {
+      current = this.head;
+      for(var i = 0; i < index; i++) {
+        current = current.next;
+      }
+    }
+    else {
+      current = this.tail;
+      for(var i = this._length; i > index; i--) {
+        current = current.previous;
+      }
+    }
+
+    return current;
+  };
+
+  /**
+   * Returns the length of the list
+   * @return {int}
+   */
+  DoublyLinkedList.prototype.length = function() {
+    return this._length;
+  };
+
+  /**
+   * Array form of the DoublyLinkedList.
+   * @return {Array}
+   */
+  DoublyLinkedList.prototype.toArray = function() {
+    var array = [],
+        current = this.head;
+
+    while(current) {
+      array.push(current.data);
+      current = current.next;
+    }
+
+    return array;
+  };
+
+  /**
+   * String representation of the DoublyLinkedList.
+   * @return {String} [description]
+   */
+  DoublyLinkedList.prototype.toString = function() {
+    return this.toArray().toString();
+  };
 
   return DoublyLinkedList;
 });

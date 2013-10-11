@@ -77,7 +77,7 @@ define(['Node'], function(Node) {
       return false;
     }
 
-    current = this.head;
+    var current = this.head;
     for(var i = 0; i < index; i++) {
       current = current.next;
     }
