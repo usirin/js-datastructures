@@ -129,7 +129,53 @@ define(['Node'], function(Node) {
     return this;
   };
 
-  
+  /**
+   * Deletes the node at the given index
+   * @param  {int} index
+   * @return {LinkedList || boolean} false for out of bounds.
+   */
+  LinkedList.prototype.deleteAt = function(index) {
+    if(index > this.length() || index < 0) {
+      console.log('Out of bounds');
+      return false;
+    }
+
+    // if index === 0 it means the
+    // shift operation.
+    if(index === 0) {
+      this.shift();
+      return this;
+    }
+
+    // if the last element of the list
+    // it means the trim operation.
+    if(index === this.length() - 1) {
+      this.trim();
+      return this;
+    }
+
+    var current = this.head;
+
+    // stop at the node just before the
+    // asked node.
+    for(var i = 1; i < index; i++) {
+      current = current.next;
+    }
+    
+    // the note to be deleted.
+    var deleteNode = current.next;
+
+    // get the rest of the list.
+    var restOfTheList = deleteNode.next;
+
+    // connect rest of the list to the
+    // node just before the node to be
+    // deleted.
+    current.next = restOfTheList;
+
+    this._length = this._length - 1;
+    return this;
+  };
 
   /**
    * Trims down an item from the list
