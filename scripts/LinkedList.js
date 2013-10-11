@@ -7,7 +7,7 @@ define(['Node'], function(Node) {
   /**
    * Appends an item to the end of the list.
    * @param  {mixed} data
-   * @return {LinkedList}
+   * @return {LinkedList|boolean}
    */
   LinkedList.prototype.append = function(data) {
     if(!data) {
@@ -42,7 +42,7 @@ define(['Node'], function(Node) {
   /**
    * Prepends an item to the start of the list.
    * @param  {mixed} data
-   * @return {LinkedList}
+   * @return {LinkedList|boolean}
    */
   LinkedList.prototype.prepend = function(data) {
     if(!data) {
@@ -69,7 +69,7 @@ define(['Node'], function(Node) {
   /**
    * Returns the node at the given index.
    * @param  {int} index
-   * @return {Node || boolean} false for out of bounds.
+   * @return {Node|boolean} false for out of bounds.
    */
   LinkedList.prototype.at = function(index) {
     if(index >= this.length() || index < 0) {
@@ -89,7 +89,7 @@ define(['Node'], function(Node) {
    * Insert a data to the given index
    * @param  {int} index
    * @param  {mixed} data
-   * @return {LinkedList || boolean} false for out of bounds
+   * @return {LinkedList|boolean} false for out of bounds
    */
   LinkedList.prototype.insertAt = function(index, data) {
     if(index > this.length() || index < 0) {
@@ -132,7 +132,7 @@ define(['Node'], function(Node) {
   /**
    * Deletes the node at the given index
    * @param  {int} index
-   * @return {LinkedList || boolean} false for out of bounds.
+   * @return {LinkedList|boolean} false for out of bounds.
    */
   LinkedList.prototype.deleteAt = function(index) {
     if(index > this.length() || index < 0) {
