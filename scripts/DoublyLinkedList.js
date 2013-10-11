@@ -113,6 +113,11 @@ define(['DoublyNode'], function(Node) {
     return current;
   };
 
+  /**
+   * Returns the node at the given index.
+   * @param  {int} index
+   * @return {Node || boolean} false for out of bounds.
+   */
   DoublyLinkedList.prototype.insertAt = function(index, data) {
     if(index > this.length() || index < 0) {
       console.log('Out of bounds');
@@ -127,14 +132,23 @@ define(['DoublyNode'], function(Node) {
       return this.append(data);
     }
 
+    // get the right bound of the list
+    // for given index.
     var rightBound = this.at(index);
+
+    // get the left bound of the list
+    // for given index.
     var leftBound = rightBound.previous;
 
+    // create new node with data.
     var newNode = new Node(data);
 
+    // insert it between bounds.
     newNode.next = rightBound;
     newNode.previous = leftBound;
 
+    // attach necessary pointers from
+    // bounds to the new node.
     leftBound.next = newNode;
     rightBound.previous = newNode;
 
