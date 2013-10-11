@@ -91,7 +91,7 @@ define(['DoublyNode'], function(Node) {
 
     // means it is close to the start,
     // so we will iterate from the head.
-    if(index <= this.length() / 2) {
+    if(index <= this._length / 2) {
       current = this.head;
       for(var i = 0; i < index; i++) {
         current = current.next;
