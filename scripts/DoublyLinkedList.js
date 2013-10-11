@@ -80,7 +80,11 @@ define(['DoublyNode'], function(Node) {
     return this;
   };
 
-
+  /**
+   * Returns the node at the given index.
+   * @param  {int} index
+   * @return {Node || boolean} false for out of bounds.
+   */
   DoublyLinkedList.prototype.at = function(index) {
     if(index > this.length() || index < 0) {
       console.log('Out of bounds');
@@ -97,6 +101,8 @@ define(['DoublyNode'], function(Node) {
         current = current.next;
       }
     }
+    // means it is close to the end,
+    // so we will iterate from the tail.
     else {
       current = this.tail;
       for(var i = this._length; i > index; i--) {
