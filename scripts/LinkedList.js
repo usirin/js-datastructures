@@ -66,6 +66,31 @@ define(['Node'], function(Node) {
     return this;
   };
 
+  /**
+   * Returns the node at the given index.
+   * @param  {int} index
+   * @return {Node || boolean} false for out of bounds.
+   */
+  LinkedList.prototype.at = function(index) {
+    if(index > this.length() || index < 0) {
+      console.log('Out of bounds');
+      return false;
+    }
+
+    current = this.head;
+    for(var i = 0; i < index; i++) {
+      current = current.next;
+    }
+
+    return current;
+  };
+
+  /**
+   * Insert a data to the given index
+   * @param  {int} index
+   * @param  {mixed} data
+   * @return {LinkedList || boolean} false for out of bounds
+   */
   LinkedList.prototype.insertAt = function(index, data) {
     if(index > this.length() || index < 0) {
       console.log('Out of bounds');
@@ -82,17 +107,29 @@ define(['Node'], function(Node) {
 
     var current = this.head;
 
+    // loop through to the given index.
     for(var i = 1; i < index; i++) {
       current = current.next;
     }
-    next = current.next;
+
+    // store the rest of the list in a
+    // local variable so that we don't
+    // lost it.
+    var next = current.next;
+
+    // create a new node and put it as next
+    // node to the current one.
     var newNode = new Node(data);
     current.next = newNode;
+
+    // put rest of the list to as next to the
+    // new node.
     newNode.next = next;
     this._length = this._length + 1;
     return this;
-
   };
+
+  
 
   /**
    * Trims down an item from the list
